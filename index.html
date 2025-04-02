@@ -4,20 +4,19 @@
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="SpatialVLM: a visual language model from Google DeepMind that natively understand and reason about spatial relationships."
+      content="NuScenes-SpatialQA: A Spatial Understanding and Reasoning Benchmark for Vision-Language Models in Autonomous Driving"
     />
     <meta
       name="keywords"
-      content="VLM, spatial reasoning, Large Language Model, LLM, multimodal, visual language model, distance estimation"
+      content="VLM, spatial reasoning, spatial understanding, Large Language Model, LLM, multimodal, visual language model, VLM, vision=language model, distance estimation"
     />
     <meta
       property="og:image"
-      content="https://spatial-vlm.github.io/static/images/teaser2.png"
+      content="TODO"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
-      SpatialVLM: Endowing Vision-Language Models with Spatial Reasoning
-      Capabilities
+        NuScenes-SpatialQA: A Spatial Understanding and Reasoning Benchmark for Vision-Language Models in Autonomous Driving
     </title>
 
     <!--TWITTER TODO-->
@@ -25,11 +24,11 @@
     <meta name="twitter:title" content="Spatial Visual Language Model" />
     <meta
       name="twitter:description"
-      content="SpatialVLM: A visual language model that natively understand and reason about spatial relationships"
+      content="NuScenes-SpatialQA: A Spatial Understanding and Reasoning Benchmark for Vision-Language Models in Autonomous Driving"
     />
     <meta
       name="twitter:image"
-      content="https://spatial-vlm.github.io/static/images/teaser2.png"
+      content="TODO"
     />
 
     <link
@@ -61,49 +60,36 @@
           <div class="columns is-centered">
             <div class="column has-text-centered">
               <h1 class="title is-1 publication-title">
-                Spatial VLM: Endowing Vision-Language Models with Spatial
-                Reasoning Capabilities
+                NuScenes-SpatialQA: A Spatial Understanding and Reasoning Benchmark
+                for Vision-Language Models in Autonomous Driving
               </h1>
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
-                  <a href="https://boyuan.space/">Boyuan Chen</a
-                  ><sup>1,2,*,†</sup>,</span
-                >
+                  Kexin Tian</a><sup>1</sup>,
+                </span>      
                 <span class="author-block">
-                  <a href="https://drzhuoxu.github.io/">Zhuo Xu</a
-                  ><sup>1,*</sup>,</span
-                >
-                <span class="author-block">
-                  <a href="https://kirmani.ai/">Sean Kirmani</a
+                  Jingrui Mao</a
                   ><sup>1</sup>,</span
                 >
                 <span class="author-block">
-                  <a href="https://brianichter.com/">Brian Ichter</a
+                  Yunlong Zhang</a
                   ><sup>1</sup>,</span
                 >
                 <span class="author-block">
-                  <a href="https://dannydriess.github.io/">Danny Driess</a
-                  ><sup>1</sup>,
+                  Jiwan Jiang</a
+                  ><sup>2</sup>,</span
+                >
+                <span class="author-block">
+                  Yang Zhou</a
+                  ><sup>1,*</sup>,
                 </span>
                 <span class="author-block">
-                  <a href="https://www.peteflorence.com/">Pete Florence</a
-                  ><sup>1</sup>,
-                </span>
-                <span class="author-block">
-                  <a href="https://dorsa.fyi/">Dorsa Sadigh</a><sup>1,3</sup>,
-                </span>
-                <span class="author-block">
-                  <a href="https://geometry.stanford.edu/member/guibas/"
-                    >Leonidas Guibas</a
-                  ><sup>1,3</sup>,
-                </span>
-                <span class="author-block">
-                  <a href="https://fxia22.github.io/">Fei Xia</a><sup>1</sup>
+                  <a href="https://vztu.github.io/">Zhengzhong Tu</a
+                  ><sup>1,*</sup>
                 </span>
               </div>
               <div>
-                <sup>†</sup> Work done while interning at Google DeepMind.
-                <sup>*</sup> Equal contribution alphabetically.
+                <sup>*</sup> Corresponding authors.
               </div>
 
               <br />
@@ -111,35 +97,24 @@
                 <ul class="affiliation-list">
                   <li class="affiliation">
                     <img
-                      src="./static/images/deepmind.jpg"
-                      alt="DeepMind Logo"
+                      src="./static/images/tamu.jpg"
+                      alt="TAMU Logo"
                       class="logo"
                     />
                     <span class="author-block"
-                      ><sup>1</sup>Google DeepMind</span
+                      ><sup>1</sup>Texas A&M University</span
                     >
                   </li>
                   <li class="affiliation">
                     <img
-                      src="./static/images/mit.jpg"
-                      alt="MIT Logo"
+                      src="./static/images/uwmadison.png"
+                      alt="UW-MADISON Logo"
                       class="logo"
                     />
-                    <span class="author-block"><sup>2</sup>MIT</span>
-                  </li>
-                  <li class="affiliation">
-                    <img
-                      src="./static/images/stanford.jpg"
-                      alt="Stanford Logo"
-                      class="logo"
-                    />
-                    <span class="author-block"
-                      ><sup>3</sup>Stanford University</span
-                    >
+                    <span class="author-block"><sup>2</sup>University of Wisconsin-Madison</span>
                   </li>
                 </ul>
                 <br>
-                <p> <b>CVPR 2024 </b></p>
               </div>
               <br />
               <div class="column has-text-centered">
@@ -174,9 +149,20 @@
                       class="external-link button is-normal is-rounded is-dark"
                     >
                       <span class="icon">
-                        <i class="fas fa-code"></i>
+                        <i class="fas fa-database"></i>
                       </span>
-                      <span>Code (3rd party)</span>
+                      <span>Benchmark</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a
+                      href="#community-implementation"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
                     </a>
                   </span>
                 </div>
