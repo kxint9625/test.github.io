@@ -81,15 +81,16 @@
                 >
                 <span class="author-block">
                   Yang Zhou</a
-                  ><sup>1,*</sup>,
+                  ><sup>1,&#8225;</sup>,
                 </span>
                 <span class="author-block">
-                  <a href="https://vztu.github.io/">Zhengzhong Tu</a
-                  ><sup>1,*</sup>
+                  <!-- <a href="https://vztu.github.io/">Zhengzhong Tu</a> -->
+                  Zhengzhong Tu
+                  <sup>1,&#8225;</sup>
                 </span>
               </div>
               <div>
-                <sup>*</sup> Corresponding authors.
+                <sup>&#8225;</sup> Corresponding authors.
               </div>
 
               <br />
@@ -145,7 +146,7 @@
                   </span>
                   <span class="link-block">
                     <a
-                      href="[TODO]"
+                      href="https://huggingface.co/datasets/ktian6/NuScenes-SpatialQA"
                       class="external-link button is-normal is-rounded is-dark"
                     >
                       <span class="icon">
@@ -199,7 +200,10 @@
             <h2 class="title is-3 has-text-centered">QA Generation Pipeline</h2>
             <div class="content has-text-justified">
               <p>
-                TODO
+                Our QA generation framework involves two key pipelines: 
+                <strong>①<u>3D Scene Graph Generation</u></strong>: We construct a 3D scene graph for each camera view in the NuScenes dataset. An <u>auto-captioning</u> process is designed to generate instance-level descriptions for each annotated object, and the generated captions are combined with selected 3D attributes from NuScenes as node attributes. Spatial relationships between objects are encoded as edge attributes.       
+                <strong>②<u>Q&A Pairs Generation</u></strong>: Based on the structured scene graph and our predefined QA templates, we generate multi-aspect QA pairs that comprehensively cover both spatial understanding and spatial reasoning, providing a holistic evaluation of the spatial capabilities of VLMs.
+                An overview of each step is presented in the following figure.
               </p>
             </div>
             <div class="content has-text-centered">
@@ -207,13 +211,36 @@
                 src="./static/images/framework.png"
                 class="inline-figure-six"
                 alt="QA Generation Framework"
+                style="width: 88%; height: auto;"
               />
             </div>
             <h3 class="title is-4">QA Example</h3>
             <div class="content has-text-justified">
               <p>
-                TODO
+                The final QA pairs are designed to comprehensively evaluate the spatial capabilities of vision-language models, and are categorized into two main types:
               </p>
+
+              <ol>
+                <li>
+                  <b>Spatial Understanding</b>: Assesses direct spatial relationships and metric measurements, including:
+                  <ul>
+                    <li><u><em>Qualitative QA</em></u>: Tasks that evaluate relative spatial relations, like relative spatial relationships and dimension comparison.</li>
+                    <li><u><em>Quantitative QA</em></u>: Tasks that involve direct numerical estimation, requiring models to extract specific values such as distances, dimensions, or angles.</li>
+                  </ul>
+                </li>
+                <li>
+                  <b>Spatial Reasoning</b>: Involves higher-level inference beyond direct attribute retrieval, including:
+                  <ul>
+                    <li><u><em>Direct Reasoning QA</em></u>: Deductive questions based on object relations.</li>
+                    <li><u><em>Situational Reasoning QA</em></u>: Real-world scenario-based reasoning involving safety or physical constraints.</li>
+                  </ul>
+                </li>
+              </ol>
+                            
+              <p>
+                The figure below shows some examples of the QA pairs:
+              </p>
+              
             </div>
             <div class="content has-text-centered">
               <img
@@ -222,12 +249,28 @@
                 alt="Samples of the dataset."
               />
             </div>
-            <h3 class="title is-4">Benchmark Comparison</h3>
-            <div class="content has-text-centered">
+            <h3 class="title is-4">Benchmark Statistics</h3>
+            <div class="content has-text-justified">
+              <p>
+                The final benchmark consists of approximately <strong>3.5 million</strong> QA pairs, including around <strong>2.5M</strong> qualitative and <strong>0.6M</strong> quantitative questions under the spatial understanding category, as well as <strong>0.2M</strong> reasoning-based questions covering both direct and situational reasoning.
+              </p>
+              
+              <p>
+                These QA pairs span <strong>6,000</strong> keyframes, each captured from <strong>6 camera views</strong> in the NuScenes dataset.
+              </p>
+              
+              <p>
+                As shown in the following figure, we compare NuScenes-SpatialQA with existing open-source benchmarks in autonomous driving and spatial reasoning to highlight its scale and coverage. It is the first <u>large-scale</u>, <u>ground-truth-based</u> QA benchmark specifically designed to evaluate both <u>spatial understanding</u> and <u>spatial reasoning</u> capabilities of VLMs in <u>autonomous driving</u>.
+              </p>
+              
+            </div>
+
+            <div class="content has-text-centered"> 
               <img
                 src="./static/images/compare_table.png"
                 class="inline-figure-six"
                 alt="Samples of the dataset."
+                style="width: 98%; max-width: 900px; height: auto;"
               />
             </div>
           </div>
@@ -242,73 +285,53 @@
         <div class="columns is-centered">
           <div class="column is-full-width has-text-justified">
             <h2 class="title is-3 has-text-centered">Benchmark Evaluations</h2>
+            <!-- <h3 class="title is-4">Spatial Understanding</h3> -->
+            <figure style="text-align: center;">
+              <img src="./static/images/table1.png" alt="Benchmark results on spatial understanding tasks." style="max-width: 100%; height: auto;" />
+              <figcaption style="display: inline-block; text-align: left; font-size: 1.0em; color: #555; margin-top: 8px; max-width: 988px;">
+                Performance on <strong>spatial understanding</strong> tasks in NuScenes-SpatialQA. The upper part of the table reports results on <strong>Qualitative Spatial QA</strong>, where values represent <em>accuracy</em> (<strong>↑</strong>). The lower part presents results on <strong>Quantitative Spatial QA</strong>, where values correspond to <em title="A prediction is considered correct if it falls within a predefined numeric threshold.">Tolerance-based Accuracy *</em> (<strong>↑</strong>) / <em>MAE</em> (<strong>↓</strong>). Baseline marked with <strong>✧</strong> is spatial-enhanced VLM.    
+                <br />
+                <em style="font-size: 0.8em;">* Tolerance-based Accuracy is defined to measure the proportion of model responses that fall within the range of [75%, 125%] of the ground-truth answer.      </em>
+              </figcaption>
+            </figure>
 
-            <div class="content has-text-justified">
-              <p>
-                TODO
-              </p>
-            </div>
-            <h3 class="title is-4">Spatial Understanding</h3>
+            <div style="height: 36px;"></div>
 
-            <div class="content has-text-justified">
-              <p>
-                TODO
-              </p>
-            </div>
-            <div class="content has-text-centered">
-              <img
-                src="./static/images/table1.png"
-                class="inline-figure-six"
-                alt="qualitative spatial QA samples."
-              />
-              <img
-                src="./static/images/radar.png"
-                class="inline-figure-six"
-                alt="qualitative spatial QA samples."
-              />
-            </div>
-            <div class="content has-text-justified">
-              <p>
-                TODO
-              </p>
-            </div>
+            
+            <figure style="text-align: center;">
+              <img src="./static/images/radar.png" alt="Benchmark results on spatial understanding tasks." style="max-width: 78%; height: auto;" />
+              <figcaption style="display: inline-block; text-align: left; font-size: 1.0em; color: #555; margin-top: 8px; max-width: 988px;">
+                Radar figure of the <strong>spatial understanding</strong> evaluations.         
+              </figcaption>
+            </figure>
+            <div style="height: 36px;"></div>
 
-            <h3 class="title is-4">Spatial Reasoning</h3>
-            <div class="content has-text-centered">
-              <img
-                src="./static/images/table3.png"
-                class="inline-figure-six"
-                alt="Samples of the dataset."
-              />
-            </div>
-            <div class="content has-text-justified">
-              <p>
-                TODO
-              </p>
-            </div>
+            <!-- <h3 class="title is-4">Spatial Reasoning</h3> -->
+            <figure style="text-align: center;">
+              <img src="./static/images/table2.png" alt="Benchmark results on spatial understanding tasks." style="max-width: 88%; height: auto;" />
+              <figcaption style="display: inline-block; text-align: left; font-size: 1.0em; color: #555; margin-top: 8px; max-width: 988px;">
+                Performance on <strong>Spatial Reasoning</strong> tasks in NuScenes-SpatialQA. The table reports <em>Tolerance-based Accuracy</em> (<strong>↑</strong>) across different VLMs.         
+              </figcaption>
+            </figure>
+            <div style="height: 36px;"></div>
 
-            <h3 class="title is-4">Effect of Backbone Architecture</h3>
-            <div class="content has-text-justified">
-              <p>
-                TODO
-              </p>
-            </div>
-            <div class="content has-text-centered">
-              <img
-                src="./static/images/table3.png"
-                class="inline-figure-six"
-                alt="qualitative spatial QA samples."
-              />
-            </div>
+            <!-- <h3 class="title is-4">Effect of Backbone Architecture</h3> -->
+            <figure style="text-align: center;">
+              <img src="./static/images/table3.png" alt="Benchmark results on spatial understanding tasks." style="max-width: 88%; height: auto;" />
+              <figcaption style="display: inline-block; text-align: left; font-size: 1.0em; color: #555; margin-top: 8px; max-width: 988px;">
+                  Effect of <strong>backbone architecture</strong> and <strong>model scaling</strong> on VLM performance. This table reports <em>Tolerance-based Accuracy</em> (<strong>↑</strong>) across different model variants of LLaVA-v1.6. The first two rows compare the impact of different backbone architectures (Mistral-7B vs. Vicuna-7B). The last three rows examine the effect of model scaling.  
+              </figcaption>
+            </figure>
+            <div style="height: 36px;"></div>
 
-            <h3 class="title is-4">Effect of Chain-of-Thought (CoT) Reasoning</h3>
-            <img
-            src="./static/images/table4.png"
-            class="inline-figure-six"
-            alt="Spatial VLM is able to perform quantitative spatial reasoning compared to baselines."
-            height="auto"
-            width="800px"
-          />
+            <figure style="text-align: center;">
+              <img src="./static/images/table4.png" alt="Benchmark results on spatial understanding tasks." style="max-width: 49%; height: auto;" />
+              <figcaption style="display: inline-block; text-align: left; font-size: 1.0em; color: #555; margin-top: 8px; max-width: 988px;">
+                Effects of <b>CoT reasoning</b> on VLM performance in NuScenes-SpatialQA.         
+              </figcaption>
+            </figure>
+
+            <!-- <h3 class="title is-4">Effect of Chain-of-Thought (CoT) Reasoning</h3> -->
           </div>
         </div>
       </div>
@@ -334,23 +357,11 @@
     <section class="section" id="BibTeX">
       <div class="container is-max-desktop content">
         <h2 class="title has-text-centered">BibTeX</h2>
-        <pre><code>@article{chen2024spatialvlm,
-  title = {SpatialVLM: Endowing Vision-Language Models with Spatial Reasoning Capabilities},
-  author = {Chen, Boyuan and Xu, Zhuo and Kirmani, Sean and Ichter, Brian and Driess, Danny and Florence, Pete and Sadigh, Dorsa and Guibas, Leonidas and Xia, Fei},
-  journal = {arXiv preprint arXiv:2401.12168},
-  year = {2024},
-  url = {https://arxiv.org/abs/2401.12168},
-}</code></pre>
+        <pre><code>TODO</code></pre>
 
 <p> If you are using the open source implementation listed above, please also cite:</p>
 
-      <pre><code>@misc{VQASynth,
-        author = {remyxai},
-        title = {VQASynth},
-        year = {2024},
-        note = {GitHub repository},
-        url = {https://github.com/remyxai/VQASynth/tree/main}
-      }</code></pre>
+      <pre><code>TODO</code></pre>
       </div>
 
     </section>
